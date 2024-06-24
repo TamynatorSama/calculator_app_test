@@ -27,7 +27,7 @@ class AppBarExtension extends StatelessWidget {
               subtitle: "QuickPoints",
               btnColor: AppTheme.primatyColor,
               btnTextColor: Colors.white,
-              btnText: "Fund my wallet"),
+              btnText: "Buy more QuickPoints"),
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -38,7 +38,7 @@ class AppBarExtension extends StatelessWidget {
               subtitle: "Subscription Mode",
               btnTextColor: Colors.white,
               type: ContentType.Medal,
-              btnText: "Fund my wallet"),
+              btnText: "Upgrade to Premium"),
         ),
       ],
     );
@@ -50,7 +50,7 @@ Widget _contentBuilder(
         required String subtitle,
         required Color backgroundColor,
         Color? btnColor,
-        Color btnTextColor=const Color(0xff8C6510),
+        Color btnTextColor = const Color(0xff8C6510),
         required String btnText,
         ContentType type = ContentType.text}) =>
     Container(
@@ -61,12 +61,10 @@ Widget _contentBuilder(
             borderRadius: BorderRadius.circular(10),
           ),
           shadows: [
-            
             BoxShadow(
-              spreadRadius: -10,
-              blurRadius: 16,
-              color: Colors.black.withOpacity(0.8)
-            )
+                spreadRadius: -10,
+                blurRadius: 16,
+                color: Colors.black.withOpacity(0.8))
           ],
           color: backgroundColor),
       child: Column(children: [
@@ -82,7 +80,7 @@ Widget _contentBuilder(
                     ),
                     Text(
                       title,
-                      style: AppTheme.titleTheme,
+                      style: AppTheme.titleTheme.copyWith(fontSize: 16),
                     ),
                   ]
                 : [
@@ -101,7 +99,11 @@ Widget _contentBuilder(
                     ),
                   ]),
         const Spacer(),
-        _buildButtom(btnText: btnText,btnTextColor: btnTextColor, btnColor: btnColor, type: type),
+        _buildButtom(
+            btnText: btnText,
+            btnTextColor: btnTextColor,
+            btnColor: btnColor,
+            type: type),
         const SizedBox(height: 5),
       ]),
     );
@@ -115,21 +117,20 @@ Widget _buildButtom(
       alignment: Alignment.center,
       width: double.maxFinite,
       decoration: ShapeDecoration(
-          gradient: type == ContentType.text?null: const LinearGradient(colors: [
-            Color(0xffFFD800),
-            Color(0xffFF6100)
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          stops: [0.02,0.5]
-          ),
+          gradient: type == ContentType.text
+              ? null
+              : const LinearGradient(
+                  colors: [Color(0xffFFD800), Color(0xffFF6100)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  stops: [0.02, 0.5]),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
           ),
-          color: type == ContentType.Medal?null:btnColor),
+          color: type == ContentType.Medal ? null : btnColor),
       child: Text(
         btnText,
-        style: AppTheme.titleTheme.copyWith(fontSize: 10,color: btnTextColor),
+        style: AppTheme.titleTheme.copyWith(fontSize: 8, color: btnTextColor),
       ),
     );
 
